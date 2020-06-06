@@ -8,3 +8,6 @@ build: ## Build bundle locally
 
 deploy: build ## Deploy bundle locally
 	cp target/hellofuse*.jar ${FUSE_HOME}/deploy
+
+broker:
+	docker run -d -p 61616:61616 -p 8161:8161 --name=activemq rmohr/activemq
