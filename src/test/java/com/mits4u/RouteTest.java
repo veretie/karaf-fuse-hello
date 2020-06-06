@@ -5,10 +5,10 @@ import org.apache.camel.test.blueprint.CamelBlueprintTestSupport;
 import org.junit.Test;
 
 public class RouteTest extends CamelBlueprintTestSupport {
-	
+
     @Override
     protected String getBlueprintDescriptor() {
-        return "/OSGI-INF/blueprint/blueprint.xml";
+        return "/OSGI-INF/blueprint/blueprint.xml,blueprint-test-properties.xml";
     }
 
     @Test

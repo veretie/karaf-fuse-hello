@@ -73,6 +73,13 @@
       <artifactId>camel-core</artifactId>
       <version>${camel.fuse.version}</version>
     </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>org.apache.activemq</groupId>-->
+<!--      <artifactId>activemq-karaf</artifactId>-->
+<!--      <version>${camel.fuse.version}</version>-->
+<!--    </dependency>-->
+
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-blueprint</artifactId>

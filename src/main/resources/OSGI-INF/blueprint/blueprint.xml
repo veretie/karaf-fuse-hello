@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xsi:schemaLocation="
        http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
-  <bean id="helloBean" class="com.mits4u.HelloBean">
-      <property name="say" value="Hi from Camel QWERTY"/>
+
+<bean id="helloBean" class="com.mits4u.HelloBean">
+      <property name="say" value="Hi from Camel QWERTYQQ!!!"/>
   </bean>
 
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+
+    <routeBuilder ref="route1"/>
+
     <route id="timerToLog">
       <from uri="timer:foo?period=5000"/>
       <setBody>
@@ -18,6 +23,13 @@
       <log message="The message contains ${body}"/>
       <to uri="mock:result"/>
     </route>
+
   </camelContext>
+
+  <bean id="route1" class="com.mits4u.Route1">
+    <property name="deadLetterUri" value="{{queues.deadLetter}}"/>
+    <property name="maximumRedeliveries" value="0"/>
+    <property name="backoffMultiplier" value="0"/>
+  </bean>
 
 </blueprint>

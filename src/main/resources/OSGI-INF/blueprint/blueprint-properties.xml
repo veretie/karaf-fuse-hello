@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+    <cm:property-placeholder persistent-id="com.mits4u.props"
+                             update-strategy="reload">
+        <cm:default-properties>
+
+            <!--Note: environment specific values should be empty and will be provided by FUSE fabric -->
+
+            <cm:property name="config.activeMq.maximumRedeliveries" value="100"/>
+            <cm:property name="broker.url" value="tcp://localhost:61616"/>
+            <cm:property name="broker.username" value=""/>
+            <cm:property name="broker.password" value=""/>
+
+            <cm:property name="queues.deadLetter" value="activemq:mits4u.internal.dlq"/>
+
+        </cm:default-properties>
+    </cm:property-placeholder>
+
+</blueprint>    
