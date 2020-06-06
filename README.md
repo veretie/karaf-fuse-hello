@@ -1,11 +1,7 @@
 # karaf-fuse-hello
 
 ### Overview
-Small project to build OSGI bundle using Camel routes and deploy it on local Fuse Karaf.
-
-### Routes
-
-![Routes](docs/todo.jpeg)
+Tiny project to build OSGI bundle using Camel routes and deploy it on local Fuse Karaf.
 
 ## Run locally
 #### Prereqs
