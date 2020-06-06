@@ -10,6 +10,9 @@
         <cm:default-properties>
 
             <cm:property name="queues.deadLetter" value="mock:dlq"/>
+            <cm:property name="queues.logsQueue" value="mock:logs"/>
+            <cm:property name="queues.emailQueue" value="direct:email"/>
+            <cm:property name="queues.mailQueue" value="direct:mail"/>
 
         </cm:default-properties>
     </cm:property-placeholder>

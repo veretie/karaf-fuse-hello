@@ -7,29 +7,26 @@
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
 
-<bean id="helloBean" class="com.mits4u.HelloBean">
-      <property name="say" value="Hi from Camel QWERTYQQ!!!"/>
-  </bean>
+    <bean id="randomMessageCreator" class="com.mits4u.RandomMessageCreator"/>
 
-  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+    <bean id="shutdown-stratagy" class="org.apache.camel.impl.DefaultShutdownStrategy" >
+        <property name="timeout" value="10" />
+    </bean>
 
-    <routeBuilder ref="route1"/>
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
 
-    <route id="timerToLog">
-      <from uri="timer:foo?period=5000"/>
-      <setBody>
-          <method ref="helloBean" method="hello"/>
-      </setBody>
-      <log message="The message contains ${body}"/>
-      <to uri="mock:result"/>
-    </route>
+        <routeBuilder ref="bookingRoutes"/>
 
-  </camelContext>
+    </camelContext>
 
-  <bean id="route1" class="com.mits4u.Route1">
-    <property name="deadLetterUri" value="{{queues.deadLetter}}"/>
-    <property name="maximumRedeliveries" value="0"/>
-    <property name="backoffMultiplier" value="0"/>
-  </bean>
+    <bean id="bookingRoutes" class="com.mits4u.BookingRoutes">
+        <property name="deadLetterUri" value="{{queues.deadLetter}}"/>
+        <property name="logsQueueUri" value="{{queues.logsQueue}}"/>
+        <property name="emailQueueUri" value="{{queues.emailQueue}}"/>
+        <property name="mailQueueUri" value="{{queues.mailQueue}}"/>
+        <property name="maximumRedeliveries" value="0"/>
+        <property name="backoffMultiplier" value="0"/>
+        <property name="randomMessageCreator" ref="randomMessageCreator"/>
+    </bean>
 
 </blueprint>
