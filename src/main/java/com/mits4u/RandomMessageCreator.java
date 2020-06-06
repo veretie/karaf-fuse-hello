@@ -19,6 +19,7 @@ public class RandomMessageCreator implements Processor {
         Message inMessage = exchange.getIn();
         inMessage.setBody(ticket);
         exchange.setProperty("sellerId", iRandom);
+        exchange.setProperty("segments", String.join(",", "A" + iRandom, "B" + iRandom, "C" + iRandom));
 
     }
 

@@ -26,28 +26,23 @@ public class BookingRoutes extends RouteBuilder {
                 .log("Creating new message")
                 .process(randomMessageCreator).id("creator")
                 .log("Generated ticket with sellerId=${header[sellerId]}, exchangeId=${exchangeId}")
+                .filter().method(HelperBean.class, "isGoldenTicket")
+                    .log("Golden ticket!!")
+                    .setHeader("goldenTicket", constant("true"))
+                .end()
                 .wireTap(logsQueueUri).id("logWiretap")
                 .choice()
                     .when(header("sellerId").isEqualTo(0))
                         .log("Unknown sellerId, failing")
                         .throwException(new RuntimeException("Unknown sellerId"))
                     .when(header("sellerId").isLessThan(6))
-                        .to(emailQueueUri).id("email")
+                        .log("sellerId=${header[sellerId]} ticket email processing, exchangeId=${exchangeId}")
                     .otherwise()
                         .log("sellerId=${header[sellerId]} ticket mail will be sent manually")
                         .to(mailQueueUri).id("mail")
-                .end();
-
-        from(emailQueueUri).id("emailQueue")
-                .log("sellerId= ticket email processing, exchangeId=${exchangeId}");
-//                .filter().method(HelperBean.class, "isGoldenTicket")
-//                    .log("Golden ticket!!")
-//                .end();
-                //enrich
-                //split
-                //aggregate
-
-
+                .end()
+                .split(header("segments").tokenize(","))
+                    .log("processing segment=${body}");
 
     }
 
