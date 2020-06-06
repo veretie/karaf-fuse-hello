@@ -31,7 +31,7 @@ public class BookingRoutes extends RouteBuilder {
                     .when(header("sellerId").isEqualTo(0))
                         .log("Unknown sellerId, failing")
                         .throwException(new RuntimeException("Unknown sellerId"))
-                    .when(header("sellerId").isLessThan(5))
+                    .when(header("sellerId").isLessThan(6))
                         .to(emailQueueUri).id("email")
                     .otherwise()
                         .log("sellerId=${header[sellerId]} ticket mail will be sent manually")

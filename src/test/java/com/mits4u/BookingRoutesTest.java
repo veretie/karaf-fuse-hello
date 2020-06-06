@@ -4,7 +4,7 @@ import org.apache.camel.test.blueprint.CamelBlueprintTestSupport;
 
 import org.junit.Test;
 
-public class RouteTest extends CamelBlueprintTestSupport {
+public class BookingRoutesTest extends CamelBlueprintTestSupport {
 
     @Override
     protected String getBlueprintDescriptor() {

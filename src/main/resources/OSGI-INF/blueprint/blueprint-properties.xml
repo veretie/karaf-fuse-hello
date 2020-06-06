@@ -11,11 +11,6 @@
 
             <!--Note: environment specific values should be empty and will be provided by FUSE fabric -->
 
-<!--            <cm:property name="config.activeMq.maximumRedeliveries" value="100"/>-->
-<!--            <cm:property name="broker.url" value="tcp://localhost:61616"/>-->
-<!--            <cm:property name="broker.username" value=""/>-->
-<!--            <cm:property name="broker.password" value=""/>-->
-
             <cm:property name="queues.deadLetter" value="activemq:mits4u.internal.dlq"/>
             <cm:property name="queues.logsQueue" value="activemq:mits4u.internal.logs"/>
             <cm:property name="queues.emailQueue" value="activemq:mits4u.internal.emails"/>
